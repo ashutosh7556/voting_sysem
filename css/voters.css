@@ -1,0 +1,35 @@
+ /* Hover effects for circular icons */
+.icon-circule:hover, 
+.icon-circule-2:hover, 
+.icon-circule-3:hover, 
+.icon-circule-4:hover, 
+.icon-circule-5:hover, 
+.icon-circule-6:hover {
+    transform: scale(1.1); /* Slightly enlarge the icon */
+    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2); /* Add a deeper shadow */
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth animation */
+}
+
+/* Hover effects for down-arrows */
+.down-arrow:hover, 
+.down-arrow-2:hover, 
+.down-arrow-3:hover, 
+.down-arrow-4:hover, 
+.down-arrow-5:hover, 
+.down-arrow-6:hover {
+    background-color: #000; /* Change color on hover */
+    transition: background-color 0.3s ease; /* Smooth color transition */
+}
+
+/* Hover effects for text links */
+.track-title a:hover {
+    color: #42AAAA; /* Change text color */
+    font-weight: bold; /* Make text bold */
+    transition: color 0.3s ease; /* Smooth color change */
+}
+
+/* Add hover effect for images inside circular icons */
+.icon-circule:hover img {
+    transform: scale(1.1); /* Slightly enlarge the image */
+    transition: transform 0.3s ease; /* Smooth animation */
+}

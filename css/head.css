@@ -1,0 +1,120 @@
+/* General Styles */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f8f9fa;
+}
+
+/* Header Styles */
+.header {
+    background-color: #007BFF;
+    color: white;
+    padding: 10px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 70px;
+}
+
+/* Top Head: Align All Items Inline */
+.top-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    gap: 20px; /* Space between element groups */
+}
+
+/* Menu Button */
+.menu-toll-links {
+    display: flex;
+    align-items: center;
+    gap: 20px; /* Space between menu button and toll links */
+}
+
+.menu-btn {
+    display: flex;
+    align-items: center;
+    color: white;
+    font-size: 18px;
+    cursor: pointer;
+}
+
+.menu-btn i {
+    margin-right: 5px;
+}
+
+/* Toll-Free Info */
+.toll-links {
+    display: flex;
+    align-items: center;
+    gap: 15px; /* Space between house icon and toll-free number */
+    font-size: 14px;
+}
+
+.toll-links span a {
+    color: white;
+    text-decoration: none;
+    font-size: 20px;
+}
+
+.toll-links span strong {
+    font-weight: bold;
+}
+
+/* Social Links */
+.soc-links ul {
+    display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    gap: 15px; /* Space between social icons */
+}
+
+.soc-links ul li a {
+    color: white;
+    font-size: 20px;
+    text-decoration: none;
+}
+
+.soc-links ul li a:hover {
+    color: #ffcc00;
+}
+
+/* Accessibility Controls */
+.accessibility-controls {
+    display: flex;
+    align-items: center;
+    gap: 10px; /* Space between accessibility buttons */
+}
+
+.accessibility-controls button {
+    background-color: white;
+    color: #007BFF;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    font-size: 14px;
+    border-radius: 4px;
+}
+
+.accessibility-controls button:hover {
+    background-color: #0056b3;
+    color: white;
+}
+
+.accessibility-controls .btn {
+    background-color: white;
+    color: #007BFF;
+    text-decoration: none;
+    padding: 5px 10px;
+    font-size: 14px;
+    border-radius: 4px;
+    display: inline-block;
+}
+
+.accessibility-controls .btn:hover {
+    background-color: #0056b3;
+    color: white;
+}
