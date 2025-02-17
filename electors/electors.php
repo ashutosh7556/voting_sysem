@@ -11,12 +11,12 @@
   	<title>electors-info</title>
   </head>
   <body>
-   <?php   
-   			include 'try/voters.php';
+   <?php
+        include 'try/voters.php';   
+   			include 'includes/db.php';
      ?>
 
-
-<span>helle users</span>
+ <p>hello world</p> 
 
   </body>
   </html>
