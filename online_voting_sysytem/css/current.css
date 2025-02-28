@@ -1,0 +1,17 @@
+ 
+/* Make the nav-items bigger */
+.nav-tabs .nav-link {
+    font-size: 1.3rem; /* Increase font size */
+    padding: 14px 24px; /* Increase padding */
+    font-weight: bold; /* Make text bold */
+}
+
+/* Change fa-circle-check icon color to yellow */
+.list-group-item i.fa-circle-check {
+    color: yellow; /* Change check icon color */
+    font-size: 1.9rem; /* Optional: Increase icon size */
+
+}
+.container-fluid{
+/*    width: 100%;*/
+}

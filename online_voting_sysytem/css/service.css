@@ -1,0 +1,39 @@
+.service-box{
+	background-color: #fdf1f7;
+}
+.service-box a {
+    text-decoration: none;
+    color: black;
+    transition: 0.3s;
+}
+
+.service-box a:hover {
+    color: #007bff; /* Change text color */
+    text-decoration: underline; /* Add underline */
+}
+
+
+.service-box li{
+	color: black;
+	background-color: #fbfbfbfb;
+	margin: 0px 0px 20px;
+	padding: 12px 24px;
+ 	font-size: 1.2rem;
+
+}
+
+  
+
+.service-box i{
+	color: blueviolet;
+	  font-size: 1.5rem;
+
+}
+
+.d-grid{
+	width: 200px;
+	height: 50px;
+	justify-content: center;
+	margin: 40px 0px 24px 10px;
+	text-decoration: none;
+}

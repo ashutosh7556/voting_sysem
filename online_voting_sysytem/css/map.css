@@ -1,0 +1,22 @@
+ .map-area iframe {
+    width: 100%; /* Makes the map responsive */
+    height: 500px; /* Adjust height as needed */
+    max-width: 800px; /* Optional: Limits maximum width */
+    display: block;
+    margin: auto;
+    border: 0;
+
+ }
+.map-area img {
+    position: relative;
+    width: 100%;
+    padding-bottom: 56.25%; /* 16:9 aspect ratio */
+    padding-bottom: 10%;
+}
+
+.sub-titile{
+	 background-color: skyblue;
+	 font-size: 1.50rem;
+
+}
+ 
