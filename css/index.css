@@ -1,97 +1,94 @@
- /* Example styles in header.css */
-body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-}
+/* ============================================================
+   HOMEPAGE — depends on design.css tokens
+   ============================================================ */
 
-.container_fluid {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background-color: #f5f5f5;
-    padding: 10px 20px;
- 	margin-top: -1px;
-  }
-
-.logo img {
-    height: 90px;
-}
-
-.sarch .btn a {
-    text-decoration: none;
-    color: #000;
-    font-size: 20px;
-}
-
-.sarch .btn a:hover {
-    color: #007BFF;
-} 
-
-.slideshow-container {
-    max-width: 100%; /* Ensure full width */
-    width: 100%; /* Full width */
-    height: 500px; /* Set the desired height */
+/* ── Hero ── */
+.hero {
     position: relative;
-    margin: auto;
-    overflow: hidden; /* Hide anything overflowing */
+    background: linear-gradient(135deg, var(--navy-900) 0%, var(--navy-700) 55%, var(--navy-600) 100%);
+    color: #fff; padding: 72px 24px; text-align: center; overflow: hidden;
 }
+.hero::after {
+    content: ""; position: absolute; inset: 0;
+    background: radial-gradient(circle at 80% 20%, rgba(255,153,51,.18), transparent 40%),
+                radial-gradient(circle at 15% 90%, rgba(19,136,8,.16), transparent 40%);
+    pointer-events: none;
+}
+.hero-inner { position: relative; max-width: 760px; margin: 0 auto; }
+.hero h1 { color: #fff; font-size: clamp(28px, 5vw, 44px); margin-bottom: 14px; }
+.hero p { font-size: var(--fs-md); opacity: .92; margin-bottom: 28px; }
+.hero-cta { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+.hero .btn-accent { padding: 13px 26px; font-size: var(--fs-base); }
+.hero .btn-ghost { color: #fff; border-color: rgba(255,255,255,.4); padding: 13px 26px; font-size: var(--fs-base); }
+.hero .btn-ghost:hover { background: rgba(255,255,255,.12); }
 
-.slides {
-    display: none;
-    width: 100%; /* Ensure full width */
-    height: 100%; /* Ensure full height */
-    object-fit: cover; /* Make sure the images fill the container while maintaining aspect ratio */
-}
+/* ── Home search ── */
+.home-search { max-width: 520px; margin: 22px auto 0; display: flex; gap: 8px; position: relative; }
+.home-search input { flex: 1; padding: 12px 16px; border: none; border-radius: var(--radius-sm); font-size: var(--fs-base); }
+.home-search button { padding: 12px 18px; background: var(--saffron); color: #3a2200; border: none; border-radius: var(--radius-sm); font-weight: 700; cursor: pointer; }
+.home-search button:hover { background: var(--saffron-dark); color: #fff; }
 
-.prev, .next {
-    position: absolute;
-    top: 50%;
-    padding: 16px;
-    color: white;
-    font-size: 18px;
-    font-weight: bold;
-    background-color: rgba(0, 0, 0, 0.5);
-    border: none;
-    cursor: pointer;
-    transition: 0.3s;
-}
+/* ── Section scaffolding ── */
+.home-section { max-width: var(--maxw); margin: 0 auto; padding: 56px 24px; }
+.section-title { text-align: center; margin-bottom: 8px; }
+.section-sub { text-align: center; color: var(--slate-500); margin-bottom: 36px; }
 
-.prev {
-    left: 0;
+/* ── Active election banner ── */
+.live-election {
+    background: linear-gradient(120deg, var(--navy-050), #fff);
+    border: 1px solid var(--navy-100); border-left: 5px solid var(--saffron);
+    border-radius: var(--radius-lg); padding: 28px 30px; box-shadow: var(--shadow-sm);
+    display: flex; align-items: center; justify-content: space-between; gap: 24px; flex-wrap: wrap;
 }
+.live-election h2 { margin: 0 0 6px; }
+.live-election .cd { font-weight: 700; color: var(--saffron-dark); font-size: var(--fs-md); }
 
-.next {
-    right: 0;
-}
+/* ── Stats strip ── */
+.home-stats { background: var(--navy-800); }
+.home-stats-inner { max-width: var(--maxw); margin: 0 auto; padding: 40px 24px;
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; text-align: center; }
+.home-stat .num { font-family: var(--font-serif); font-size: var(--fs-2xl); font-weight: 700; color: var(--saffron); }
+.home-stat .lbl { color: rgba(255,255,255,.85); font-size: var(--fs-sm); margin-top: 4px; }
 
-.prev:hover, .next:hover {
-    background-color: rgba(0, 0, 0, 0.8);
-}
- .press-link-icon {
-    background-color: #212529;
-    color: #C61190;
-    display: flex;           /* Arrange child elements in a row */
-    justify-content: space-between; /* Space between the items */
-    align-items: center;     /* Vertically align the items */
-    gap: 20px; 
-                          /* Adds space between each .fact-icon */
-}
+/* ── Announcements ── */
+.ann-list { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px,1fr)); gap: 20px; }
+.ann-card { background: #fff; border: 1px solid var(--color-border); border-left: 4px solid var(--navy-600);
+    border-radius: var(--radius); padding: 20px; box-shadow: var(--shadow-sm); }
+.ann-card.info    { border-left-color: var(--navy-600); }
+.ann-card.success { border-left-color: var(--green); }
+.ann-card.warning { border-left-color: var(--saffron); }
+.ann-card.danger  { border-left-color: var(--danger); }
+.ann-card h4 { font-family: var(--font-serif); margin: 0 0 8px; color: var(--navy-800); }
+.ann-card p { margin: 0; color: var(--slate-700); font-size: var(--fs-sm); }
+.ann-card .date { display: block; margin-top: 10px; color: var(--slate-400); font-size: var(--fs-xs); }
 
-.fact-icon {
-    display: flex;
-    flex-direction: column; /* Stack image and text vertically */
-    align-items: center;    /* Center the content */
-    text-align: center;     /* Center the text */
-}
+/* ── How it works ── */
+.steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
+.step { text-align: center; padding: 24px 18px; background: #fff; border: 1px solid var(--color-border); border-radius: var(--radius); box-shadow: var(--shadow-sm); }
+.step .n { width: 46px; height: 46px; margin: 0 auto 14px; border-radius: 50%; background: var(--navy-800); color: #fff;
+    display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: var(--fs-md); }
+.step i { font-size: 26px; color: var(--saffron-dark); margin-bottom: 10px; display: block; }
+.step h4 { font-family: var(--font-serif); margin: 0 0 6px; }
+.step p { margin: 0; color: var(--slate-500); font-size: var(--fs-sm); }
 
-.fact-icon img {
-    width: 40px;            /* Set a fixed width for the images */
-    height: 40px;           /* Set a fixed height for the images */
-    object-fit: contain;    /* Ensure the image maintains its aspect ratio */
-}
+/* ── FAQ ── */
+.faq { max-width: 800px; margin: 0 auto; }
+.faq-item { background: #fff; border: 1px solid var(--color-border); border-radius: var(--radius); margin-bottom: 12px; overflow: hidden; }
+.faq-q { width: 100%; text-align: left; background: none; border: none; cursor: pointer;
+    padding: 16px 20px; font-size: var(--fs-base); font-weight: 600; color: var(--navy-800);
+    display: flex; justify-content: space-between; align-items: center; }
+.faq-q i { transition: transform var(--transition); color: var(--saffron-dark); }
+.faq-item.open .faq-q i { transform: rotate(180deg); }
+.faq-a { max-height: 0; overflow: hidden; transition: max-height var(--transition); padding: 0 20px; color: var(--slate-600); }
+.faq-item.open .faq-a { max-height: 240px; padding-bottom: 18px; }
 
-.fact-icon a {
-    text-decoration: none;  /* Remove underlines from links */
-    color: inherit;         /* Inherit text color */
+/* ── Quick actions (reused from pages.css) already themed ── */
+.home-quick { background: var(--slate-050); padding: 48px 24px; }
+
+@media (max-width: 768px) {
+    .home-stats-inner { grid-template-columns: repeat(2,1fr); }
+    .steps { grid-template-columns: repeat(2,1fr); }
+}
+@media (max-width: 480px) {
+    .home-stats-inner, .steps { grid-template-columns: 1fr; }
 }

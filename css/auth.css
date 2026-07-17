@@ -1,0 +1,64 @@
+/* ============================================================
+   AUTH PAGES — login / register  (depends on design.css tokens)
+   ============================================================ */
+
+body.auth-body {
+    min-height: 100vh;
+    display: flex; align-items: center; justify-content: center;
+    background: linear-gradient(135deg, var(--navy-900) 0%, var(--navy-700) 60%, var(--navy-600) 100%);
+    padding: 24px;
+}
+
+.auth-wrapper { width: 100%; display: flex; justify-content: center; }
+
+.auth-card {
+    background: #fff;
+    width: 100%;
+    max-width: 460px;
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-lg);
+    overflow: hidden;
+}
+.auth-card.wide { max-width: 720px; }
+
+/* flag accent strip on top of card */
+.auth-card::before {
+    content: ""; display: block; height: 5px;
+    background: linear-gradient(90deg, var(--saffron) 0 33%, #fff 33% 66%, var(--green) 66% 100%);
+}
+
+.auth-inner { padding: 36px 34px; }
+
+.auth-logo { text-align: center; margin-bottom: 12px; }
+.auth-logo i { font-size: 40px; color: var(--navy-800); }
+.auth-logo img { height: 56px; }
+
+.auth-card h2 {
+    text-align: center; color: var(--navy-800);
+    font-size: var(--fs-xl); margin-bottom: 4px;
+}
+.auth-subtitle { text-align: center; color: var(--slate-500); font-size: var(--fs-sm); margin-bottom: 24px; }
+
+/* uses shared .form-group / .form-control from design.css */
+.auth-card .btn-primary { width: 100%; padding: 12px; font-size: var(--fs-base); margin-top: 6px; }
+
+.auth-footer {
+    text-align: center; margin-top: 20px;
+    font-size: var(--fs-sm); color: var(--slate-500);
+}
+.auth-footer a { color: var(--navy-600); text-decoration: none; font-weight: 700; }
+.auth-footer a:hover { text-decoration: underline; }
+
+.auth-divider {
+    display: flex; align-items: center; gap: 12px;
+    color: var(--slate-400); font-size: var(--fs-xs);
+    margin: 20px 0;
+}
+.auth-divider::before, .auth-divider::after {
+    content: ""; flex: 1; height: 1px; background: var(--slate-200);
+}
+
+@media (max-width: 520px) {
+    .auth-inner { padding: 28px 22px; }
+    .form-row { grid-template-columns: 1fr; }
+}

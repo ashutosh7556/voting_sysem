@@ -1,127 +1,70 @@
+<?php
+require 'includes/db.php';
+require 'includes/functions.php';
+
+if (isset($_SESSION['user_id'])) { header("Location: includes/dashboard.php"); exit; }
+
+$error = '';
+
+if ($_SERVER["REQUEST_METHOD"] === "POST") {
+    csrf_verify();
+    $username = trim($_POST['username'] ?? '');
+    $password = $_POST['password'] ?? '';
+
+    if ($username !== '' && $password !== '') {
+        $stmt = $conn->prepare("SELECT * FROM voters WHERE username = ?");
+        $stmt->execute([$username]);
+        $user = $stmt->fetch();
+
+        if ($user && password_verify($password, $user['password'])) {
+            session_regenerate_id(true);              // prevent session fixation
+            $_SESSION['user_id']  = $user['id'];
+            $_SESSION['username'] = $user['username'];
+            $_SESSION['is_admin'] = !empty($user['is_admin']);
+            header("Location: " . (!empty($user['is_admin']) ? 'admin/index.php' : 'includes/dashboard.php'));
+            exit;
+        }
+        $error = "Invalid username or password.";
+    } else {
+        $error = "Please fill in both fields.";
+    }
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login - Voting System</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background: linear-gradient(to right, #4facfe, #00f2fe);
-            height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-        .login-container {
-            background-color: white;
-            width: 400px;
-            padding: 20px 30px;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            text-align: center;
-        }
-        h2 {
-            color: #333;
-            margin-bottom: 20px;
-        }
-        .form-group {
-            margin-bottom: 15px;
-            text-align: left;
-        }
-        .form-group label {
-            font-weight: bold;
-            display: block;
-            margin-bottom: 5px;
-        }
-        .form-group input {
-            width: 100%;
-            padding: 10px;
-            font-size: 14px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-        }
-        button {
-            width: 100%;
-            padding: 10px;
-            background: #4facfe;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            font-size: 16px;
-            cursor: pointer;
-        }
-        button:hover {
-            background: #00aaff;
-        }
-        .error {
-            color: red;
-            margin-bottom: 10px;
-            font-size: 14px;
-        }
-        .success {
-            color: green;
-            margin-bottom: 10px;
-            font-size: 14px;
-        }
-    </style>
+    <title>Login · Voting System</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer"/>
+    <link rel="stylesheet" href="css/design.css">
+    <link rel="stylesheet" href="css/auth.css">
 </head>
-<body>
-    
-    <div class="login-container">
-        <h2>Voting System Login</h2>
-        <?php if (isset($error)) echo "<p class='error'>$error</p>"; ?>
+<body class="auth-body">
+<div class="auth-wrapper">
+    <div class="auth-card">
+      <div class="auth-inner">
+        <div class="auth-logo"><i class="fa-solid fa-check-to-slot"></i></div>
+        <h2>Voter Login</h2>
+        <p class="auth-subtitle">Sign in to cast your vote</p>
+
+        <?php if ($error): ?><div class="alert alert-error"><i class="fa-solid fa-circle-exclamation"></i> <?= e($error) ?></div><?php endif; ?>
+
         <form method="POST" action="">
+            <?= csrf_field() ?>
             <div class="form-group">
-                <label for="username">Username</label>
+                <label for="username"><i class="fa-solid fa-user"></i> Username</label>
                 <input type="text" id="username" name="username" placeholder="Enter your username" required>
             </div>
             <div class="form-group">
-                <label for="password">Password</label>
+                <label for="password"><i class="fa-solid fa-lock"></i> Password</label>
                 <input type="password" id="password" name="password" placeholder="Enter your password" required>
             </div>
-            <button type="submit">Login</button>
+            <button type="submit" class="btn-primary"><i class="fa-solid fa-right-to-bracket"></i> Login</button>
         </form>
+        <p class="auth-footer">Don't have an account? <a href="register.php">Register here</a></p>
+      </div>
     </div>
+</div>
 </body>
 </html>
-
-<?php
-
-include 'includes/db.php';
- session_start();
- 
- 
-
-// Handle login submission
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $username = trim($_POST['username']);
-    $password = trim($_POST['password']);
-
-    if (!empty($username) && !empty($password)) {
-        // Query database for user
-        $query = "SELECT * FROM voters WHERE username = :username";
-        $stmt = $conn->prepare($query);
-        $stmt->bindParam(':username', $username, PDO::PARAM_STR);
-        $stmt->execute();
-
-        $user = $stmt->fetch(PDO::FETCH_ASSOC);
-
-        if ($voters && password_verify($password, $user['password'])) {
-            // Success: Store user info in session
-            $_SESSION['user_id'] = $user['id'];
-            $_SESSION['username'] = $user['username'];
-            header("Location:..includes/dashboard.php");  // Redirect to dashboard
-            exit;
-        } else {
-            $error = "Invalid username or password.";
-        }
-    } else {
-        $error = "Please fill in both fields.";
-    }
-}
-
-?>
-

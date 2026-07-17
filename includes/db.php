@@ -1,12 +1,11 @@
 <?php
-$servername = "localhost";
-$username = "root";
-$password = "";
-$database = "voting_system";
+require_once __DIR__ . '/config.php';
 
-$conn = new mysqli($servername, $username, $password, $database);
-
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
+try {
+    $conn = new PDO("mysql:host=" . DB_HOST . ";dbname=" . DB_NAME . ";charset=utf8", DB_USER, DB_PASS);
+    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    $conn->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
+} catch (PDOException $e) {
+    die(json_encode(['error' => 'Connection failed: ' . $e->getMessage()]));
 }
 ?>

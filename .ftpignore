@@ -1,0 +1,27 @@
+# Dev & Git files
+.git
+.gitattributes
+.github
+
+# SQL files — run manually on server DB
+migration.sql
+database_setup.sql
+
+# Local dev only
+router.php
+ttt.php
+
+# Docs
+README.md
+
+# Old/unused folders
+links/
+online_voting_sysytem/
+electors/
+
+# Duplicate/old files
+includes/dashbord.php
+
+# OS files
+.DS_Store
+Thumbs.db
