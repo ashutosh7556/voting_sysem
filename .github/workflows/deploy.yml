@@ -20,13 +20,13 @@ jobs:
           server:   ${{ secrets.INFINITY_FTP_SERVER }}
           username: ${{ secrets.INFINITY_FTP_USERNAME }}
           password: ${{ secrets.INFINITY_FTP_PASSWORD }}
-          local-dir: ./voting_sysem/
+          local-dir: ./
           server-dir: /htdocs/
           exclude: |
             **/.git*
             **/.git*/**
             **/node_modules/**
-            **/migration.sql
+            **/migration.sql  
             **/database_setup.sql
             **/router.php
             **/ttt.php
