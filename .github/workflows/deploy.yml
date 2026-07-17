@@ -33,7 +33,7 @@ jobs:
             **/.gitattributes
             **/README.md
             **/links/**
-            **/online_voting_sysytem/**
+            **/voting_sysem/**
             **/electors/**
             **/includes/dashbord.php
           dangerous-clean-slate: false
