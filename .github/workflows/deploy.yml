@@ -1,0 +1,40 @@
+name: Deploy to InfinityFree
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    name: FTP Deploy
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Deploy via FTP
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server:   ${{ secrets.INFINITY_FTP_SERVER }}
+          username: ${{ secrets.INFINITY_FTP_USERNAME }}
+          password: ${{ secrets.INFINITY_FTP_PASSWORD }}
+          local-dir: ./voting_sysem/
+          server-dir: /htdocs/
+          exclude: |
+            **/.git*
+            **/.git*/**
+            **/node_modules/**
+            **/migration.sql
+            **/database_setup.sql
+            **/router.php
+            **/ttt.php
+            **/.gitattributes
+            **/README.md
+            **/links/**
+            **/online_voting_sysytem/**
+            **/electors/**
+            **/includes/dashbord.php
+          dangerous-clean-slate: false
+          log-level: standard
