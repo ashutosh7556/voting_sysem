@@ -34,8 +34,8 @@ function nav_active($file, $current) { return $file === $current ? 'active' : ''
             <button onclick="changeFont(2)" aria-label="Increase text size">A+</button>
             <button onclick="changeFont(-2)" aria-label="Decrease text size">A-</button>
             <?php if (isset($_SESSION['user_id'])): ?>
-                <span class="user-greeting"><i class="fa-solid fa-circle-user"></i> <?= htmlspecialchars($_SESSION['username'] ?? '') ?></span>
-                <a href="<?= $prefix ?>logout.php" class="btn btn-logout"><i class="fa-solid fa-right-from-bracket"></i> Logout</a>
+                <span class="user-greeting"><i class="fa-solid fa-circle-user"></i> <span><?= htmlspecialchars($_SESSION['username'] ?? '') ?></span></span>
+                <a href="<?= $prefix ?>logout.php" class="btn btn-logout"><i class="fa-solid fa-right-from-bracket"></i> <span>Logout</span></a>
             <?php else: ?>
                 <a href="<?= $prefix ?>login.php" class="btn"><i class="fa-solid fa-right-to-bracket"></i> Login</a>
             <?php endif; ?>
@@ -56,6 +56,12 @@ function nav_active($file, $current) { return $file === $current ? 'active' : ''
                 <?php endif; ?>
             <?php endif; ?>
         </ul>
+        <div class="nav-social">
+            <a href="https://www.facebook.com" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+            <a href="https://www.instagram.com" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+            <a href="https://x.com" aria-label="Twitter"><i class="fa-brands fa-twitter"></i></a>
+            <a href="https://www.youtube.com" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
+        </div>
     </nav>
 </header>
 

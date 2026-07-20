@@ -84,7 +84,7 @@ include 'layout.php';
     </div>
 </div>
 
-<div class="grid" style="grid-template-columns: 1.4fr 1fr;">
+<div class="grid dashboard-grid">
     <!-- Chart -->
     <div class="panel">
         <div class="panel-head"><h3><i class="fa-solid fa-chart-column"></i> Votes by Candidate</h3></div>

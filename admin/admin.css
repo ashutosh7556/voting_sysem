@@ -95,11 +95,52 @@
 .bar-fill  { height: 100%; background: linear-gradient(90deg, var(--navy-600), var(--navy-500)); border-radius: var(--radius-pill); }
 .bar-fill.win { background: linear-gradient(90deg, var(--saffron), var(--saffron-dark)); }
 
+.dashboard-grid { grid-template-columns: 1.4fr 1fr; }
+
+/* desktop: nav always visible */
+@media (min-width: 861px) {
+    .admin-sidebar-nav { display: block !important; }
+    .admin-brand { cursor: default; }
+    .admin-brand::after { display: none; }
+}
+
 /* ── Responsive ── */
 @media (max-width: 860px) {
     .admin-shell { flex-direction: column; }
-    .admin-sidebar { width: 100%; height: auto; position: static; flex-direction: column; }
-    .admin-nav { display: flex; flex-wrap: wrap; padding: 6px; }
-    .admin-nav a { border-left: none; border-bottom: 3px solid transparent; padding: 10px 14px; }
-    .admin-nav a.active { border-left: none; border-bottom-color: var(--saffron); }
+
+    .admin-sidebar {
+        width: 100%; height: auto; position: static;
+        flex-direction: column;
+    }
+    .admin-brand {
+        display: flex; justify-content: space-between; align-items: center;
+        cursor: pointer;
+    }
+    .admin-brand::after {
+        content: '\f0c9'; font-family: 'Font Awesome 6 Free'; font-weight: 900;
+        color: var(--slate-400); font-size: var(--fs-md);
+    }
+    .admin-sidebar-nav { display: none; }
+    .admin-sidebar-nav.open { display: block; }
+
+    .admin-nav { display: flex; flex-direction: column; flex-wrap: nowrap; padding: 6px 0; }
+    .admin-nav a { border-left: 3px solid transparent; border-bottom: none; padding: 12px 20px; }
+    .admin-nav a.active { border-left-color: var(--saffron); }
+
+    .admin-topbar { padding: 12px 16px; }
+    .admin-topbar h1 { font-size: var(--fs-base); }
+    .admin-content { padding: 16px; }
+
+    .panel-head { flex-direction: column; align-items: flex-start; gap: 10px; }
+    .panel-head form { width: 100%; }
+    .panel-head form input { width: 100% !important; }
+
+    .panel-body.flush { overflow-x: auto; }
+    .table { min-width: 600px; }
+
+    .admin-stats { grid-template-columns: 1fr 1fr; }
+    .bar-track { width: 100px; }
+}
+@media (max-width: 480px) {
+    .admin-stats { grid-template-columns: 1fr; }
 }

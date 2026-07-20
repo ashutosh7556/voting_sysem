@@ -39,5 +39,9 @@
 .footer-col a:hover { color: var(--saffron); }
 .footer-col p { font-size: var(--fs-sm); margin: 0 0 8px; }
 .footer-bottom { border-top: 1px solid rgba(255,255,255,.1); text-align: center; padding: 16px; font-size: var(--fs-xs); }
-@media (max-width: 768px) { .footer-inner { grid-template-columns: 1fr; gap: 24px; } }
+@media (max-width: 768px) {
+    .footer-inner { grid-template-columns: 1fr; gap: 24px; }
+    .footer-col, .footer-brand { text-align: center; }
+    .footer-logo { justify-content: center; }
+}
 </style>

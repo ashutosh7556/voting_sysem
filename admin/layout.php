@@ -32,24 +32,28 @@ $nav = [
 <body>
 <div class="admin-shell">
     <aside class="admin-sidebar">
-        <div class="admin-brand">
-            <i class="fa-solid fa-check-to-slot"></i>
-            <div>Voting Admin<small>Election Commission</small></div>
+        <div class="admin-brand" onclick="document.getElementById('adminNav').classList.toggle('open')">
+            <div style="display:flex;align-items:center;gap:10px">
+                <i class="fa-solid fa-check-to-slot"></i>
+                <div>Voting Admin<small>Election Commission</small></div>
+            </div>
         </div>
-        <nav>
-            <ul class="admin-nav">
-                <?php foreach ($nav as $key => [$href, $icon, $label]): ?>
-                    <li>
-                        <a href="<?= $href ?>" class="<?= $active === $key ? 'active' : '' ?>">
-                            <i class="fa-solid <?= $icon ?>"></i> <?= $label ?>
-                        </a>
-                    </li>
-                <?php endforeach; ?>
-            </ul>
-        </nav>
-        <div class="admin-sidebar-foot">
-            <a href="../index.php"><i class="fa-solid fa-house"></i> View Site</a>
-            <a href="../logout.php" style="margin-top:8px"><i class="fa-solid fa-right-from-bracket"></i> Logout</a>
+        <div class="admin-sidebar-nav" id="adminNav">
+            <nav>
+                <ul class="admin-nav">
+                    <?php foreach ($nav as $key => [$href, $icon, $label]): ?>
+                        <li>
+                            <a href="<?= $href ?>" class="<?= $active === $key ? 'active' : '' ?>">
+                                <i class="fa-solid <?= $icon ?>"></i> <?= $label ?>
+                            </a>
+                        </li>
+                    <?php endforeach; ?>
+                </ul>
+            </nav>
+            <div class="admin-sidebar-foot">
+                <a href="../index.php"><i class="fa-solid fa-house"></i> View Site</a>
+                <a href="../logout.php" style="margin-top:8px"><i class="fa-solid fa-right-from-bracket"></i> Logout</a>
+            </div>
         </div>
     </aside>
 
