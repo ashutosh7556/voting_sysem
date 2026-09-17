@@ -3,6 +3,17 @@ error_reporting(E_ALL);
 ini_set('display_errors', '1');
 ini_set('display_startup_errors', '1');
 
+echo "Step 1<br>";
+
+require 'includes/db.php';
+echo "Step 2<br>";
+
+require 'includes/functions.php';
+echo "Step 3<br>";
+
+$election = get_active_election($conn);
+echo "Step 4<br>";
+
 require 'includes/db.php';
 require 'includes/functions.php';
 
