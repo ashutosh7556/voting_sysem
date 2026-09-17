@@ -21,7 +21,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $address    = trim($_POST['address'] ?? '');
     $state      = trim($_POST['state'] ?? '');
     $district   = trim($_POST['district'] ?? '');
-    $cons_id    = $_POST['constituency_id'] ?: null;
+    $cons_id    = ($_POST['constituency_id'] ?? '') !== '' ? (int)$_POST['constituency_id'] : null;
     $password   = $_POST['password'] ?? '';
     $confirm    = $_POST['confirm_password'] ?? '';
 
@@ -42,7 +42,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             // optional photo
             $photo = null;
             if (!empty($_FILES['photo']['name'])) {
-                $photo = upload_image($_FILES['photo'], __DIR__ . '/uploads/voters');
+                $photo = upload_image($_FILES['photo'], 'voters');
                 if ($photo === false) { $error = "Photo upload failed (max 2MB image)."; }
             }
             if (!$error) {
@@ -68,6 +68,7 @@ function old($k){ global $old; return e($old[$k] ?? ''); }
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Register · Voting System</title>
+    <link rel="icon" type="image/webp" href="images/fevicon.webp">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer"/>
     <link rel="stylesheet" href="css/design.css">
     <link rel="stylesheet" href="css/auth.css">

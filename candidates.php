@@ -22,7 +22,8 @@ if (!$detail) {
             WHERE ca.status = 'active'";
     $params = [];
     if ($search !== '') {
-        $sql .= " AND (ca.name LIKE ? OR ca.party LIKE ?)";
+        $op = like_op();
+        $sql .= " AND (ca.name $op ? OR ca.party $op ?)";
         $params = ["%$search%","%$search%"];
     }
     $sql .= " ORDER BY ca.party, ca.name";
@@ -37,6 +38,7 @@ if (!$detail) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Candidates · Voting System</title>
+    <link rel="icon" type="image/webp" href="images/fevicon.webp">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer"/>
     <link rel="stylesheet" href="css/pages.css">
 </head>
@@ -50,7 +52,7 @@ if (!$detail) {
     <a href="candidates.php" class="btn-outline"><i class="fa-solid fa-arrow-left"></i> Back to all candidates</a>
     <div class="profile-head" style="margin-top:14px">
         <?php if (!empty($detail['photo'])): ?>
-            <img src="uploads/candidates/<?= e($detail['photo']) ?>" alt="<?= e($detail['name']) ?>" style="border-radius:50%;object-fit:cover;border:3px solid var(--navy-700)">
+            <img src="<?= e(image_url('candidates', $detail['photo'])) ?>" alt="<?= e($detail['name']) ?>" style="border-radius:50%;object-fit:cover;border:3px solid var(--navy-700)">
         <?php else: ?>
             <div class="photo-placeholder"><i class="fa-solid fa-user"></i></div>
         <?php endif; ?>
@@ -97,7 +99,7 @@ if (!$detail) {
         <div class="candidate-card">
             <div class="candidate-photo">
                 <?php if (!empty($c['photo'])): ?>
-                    <img src="uploads/candidates/<?= e($c['photo']) ?>" alt="<?= e($c['name']) ?>">
+                    <img src="<?= e(image_url('candidates', $c['photo'])) ?>" alt="<?= e($c['name']) ?>">
                 <?php else: ?>
                     <div class="photo-placeholder"><i class="fa-solid fa-user"></i></div>
                 <?php endif; ?>

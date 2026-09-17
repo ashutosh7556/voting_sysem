@@ -36,16 +36,59 @@ function e(string $s): string {
 }
 
 // ── FILE UPLOAD ──────────────────────────────────────────────
-function upload_image(array $file, string $dir) {
-    $allowed = ['image/jpeg','image/png','image/webp','image/gif'];
+/** Absolute filesystem directory for an upload category. */
+function upload_dir(string $subdir): string {
+    return UPLOAD_PATH . '/' . trim($subdir, '/\\');
+}
+
+/** Public URL for a stored upload, or null when there is no file. */
+function image_url(string $subdir, ?string $file): ?string {
+    if (empty($file)) return null;
+    return UPLOAD_URL . '/' . trim($subdir, '/') . '/' . rawurlencode($file);
+}
+
+/**
+ * Store an uploaded image under $subdir (e.g. 'candidates').
+ * Returns the stored filename, or false on rejection.
+ */
+function upload_image(array $file, string $subdir) {
     $maxSize = 2 * 1024 * 1024; // 2MB
-    if ($file['error'] !== UPLOAD_ERR_OK)   return false;
-    if ($file['size'] > $maxSize)           return false;
-    if (!in_array($file['type'], $allowed)) return false;
-    $ext  = pathinfo($file['name'], PATHINFO_EXTENSION);
-    $name = bin2hex(random_bytes(8)) . '.' . strtolower($ext);
-    $dest = rtrim($dir, '/') . '/' . $name;
-    return move_uploaded_file($file['tmp_name'], $dest) ? $name : false;
+    if (($file['error'] ?? UPLOAD_ERR_NO_FILE) !== UPLOAD_ERR_OK) return false;
+    if (($file['size'] ?? 0) > $maxSize)                          return false;
+    if (!is_uploaded_file($file['tmp_name']))                     return false;
+
+    // Trust the file's own bytes, not the client-supplied MIME type.
+    $info = @getimagesize($file['tmp_name']);
+    if ($info === false) return false;
+    $extByType = [
+        IMAGETYPE_JPEG => 'jpg',
+        IMAGETYPE_PNG  => 'png',
+        IMAGETYPE_GIF  => 'gif',
+        IMAGETYPE_WEBP => 'webp',
+    ];
+    if (!isset($extByType[$info[2]])) return false;
+
+    $dir = upload_dir($subdir);
+    if (!is_dir($dir) && !@mkdir($dir, 0775, true)) {
+        error_log("upload: cannot create directory $dir");
+        return false;
+    }
+
+    $name = bin2hex(random_bytes(8)) . '.' . $extByType[$info[2]];
+    if (!move_uploaded_file($file['tmp_name'], $dir . '/' . $name)) {
+        error_log("upload: move_uploaded_file failed into $dir");
+        return false;
+    }
+    return $name;
+}
+
+// ── SQL PORTABILITY ──────────────────────────────────────────
+/**
+ * Case-insensitive pattern match operator for the active driver.
+ * MySQL LIKE is already case-insensitive; Postgres needs ILIKE.
+ */
+function like_op(): string {
+    return DB_DRIVER === 'pgsql' ? 'ILIKE' : 'LIKE';
 }
 
 // ── ELECTION HELPERS ─────────────────────────────────────────

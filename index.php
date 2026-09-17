@@ -1,16 +1,8 @@
 <?php
-error_reporting(E_ALL);
-ini_set('display_errors', '1');
-ini_set('display_startup_errors', '1');
-
 require 'includes/db.php';
 require 'includes/functions.php';
 
-echo "Step 1<br>";
-
 $election = get_active_election($conn);
-
-echo "Step 2<br>";
 
 $announcements = $conn->query("
     SELECT * FROM announcements
@@ -18,11 +10,6 @@ $announcements = $conn->query("
     ORDER BY created_at DESC
     LIMIT 3
 ")->fetchAll();
-
-echo "Step 3<br>";
-
-$election = get_active_election($conn);
-$announcements = $conn->query("SELECT * FROM announcements WHERE is_active = 1 ORDER BY created_at DESC LIMIT 3")->fetchAll();
 
 $stat_voters = (int)$conn->query("SELECT COUNT(*) FROM voters WHERE is_admin = 0")->fetchColumn();
 $stat_cands  = (int)$conn->query("SELECT COUNT(*) FROM candidates WHERE status='active'")->fetchColumn();
@@ -37,6 +24,7 @@ $ann_icon = ['info'=>'fa-circle-info','success'=>'fa-circle-check','warning'=>'f
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Election Commission · Online Voting System</title>
+    <link rel="icon" type="image/webp" href="images/fevicon.webp">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer"/>
     <link rel="stylesheet" href="css/index.css">
     <link rel="stylesheet" href="css/pages.css">

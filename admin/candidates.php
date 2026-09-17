@@ -6,8 +6,6 @@ require_admin();
 $page_title = 'Candidates';
 $active = 'candidates';
 
-$UPLOAD_DIR = __DIR__ . '/../uploads/candidates';
-
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     csrf_verify();
     $action = $_POST['action'] ?? '';
@@ -18,13 +16,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         // photo (optional)
         $photo = $_POST['existing_photo'] ?? null;
         if (!empty($_FILES['photo']['name'])) {
-            $up = upload_image($_FILES['photo'], $UPLOAD_DIR);
+            $up = upload_image($_FILES['photo'], 'candidates');
             if ($up === false) { flash('error', 'Photo upload failed (max 2MB, JPG/PNG/WEBP/GIF).'); header('Location: candidates.php'); exit; }
             $photo = $up;
         }
         $logo = $_POST['existing_logo'] ?? null;
         if (!empty($_FILES['party_logo']['name'])) {
-            $up = upload_image($_FILES['party_logo'], __DIR__ . '/../uploads/parties');
+            $up = upload_image($_FILES['party_logo'], 'parties');
             if ($up !== false) $logo = $up;
         }
 
@@ -139,7 +137,7 @@ include 'layout.php';
             <?php foreach ($candidates as $ca): ?>
                 <tr>
                     <td><?= $ca['photo']
-                        ? '<img class="thumb" src="../uploads/candidates/'.e($ca['photo']).'" alt="">'
+                        ? '<img class="thumb" src="'.e(image_url('candidates', $ca['photo'])).'" alt="">'
                         : '<span class="thumb-ph"><i class="fa-solid fa-user"></i></span>' ?></td>
                     <td><strong><?= e($ca['name']) ?></strong></td>
                     <td><?= e($ca['party']) ?></td>

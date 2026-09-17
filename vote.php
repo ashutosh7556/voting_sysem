@@ -68,6 +68,7 @@ $preselect  = isset($_GET['candidate_id']) ? (int)$_GET['candidate_id'] : 0;
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cast Vote · Voting System</title>
+    <link rel="icon" type="image/webp" href="images/fevicon.webp">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer"/>
     <link rel="stylesheet" href="css/pages.css">
 </head>
@@ -116,7 +117,7 @@ $preselect  = isset($_GET['candidate_id']) ? (int)$_GET['candidate_id'] : 0;
                     <div class="vote-candidate-info">
                         <div class="vote-photo">
                             <?php if (!empty($c['photo'])): ?>
-                                <img src="uploads/candidates/<?= e($c['photo']) ?>" alt="">
+                                <img src="<?= e(image_url('candidates', $c['photo'])) ?>" alt="">
                             <?php else: ?>
                                 <div class="photo-placeholder"><i class="fa-solid fa-user"></i></div>
                             <?php endif; ?>

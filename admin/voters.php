@@ -36,7 +36,8 @@ $sql = "
     WHERE v.is_admin = 0";
 $params = [];
 if ($q !== '') {
-    $sql .= " AND (v.username LIKE ? OR v.full_name LIKE ? OR v.voter_id LIKE ? OR v.email LIKE ?)";
+    $op = like_op();
+    $sql .= " AND (v.username $op ? OR v.full_name $op ? OR v.voter_id $op ? OR v.email $op ?)";
     $like = "%$q%"; $params = [$like,$like,$like,$like];
 }
 $sql .= " ORDER BY v.created_at DESC";
