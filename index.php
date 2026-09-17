@@ -3,19 +3,23 @@ error_reporting(E_ALL);
 ini_set('display_errors', '1');
 ini_set('display_startup_errors', '1');
 
+require 'includes/db.php';
+require 'includes/functions.php';
+
 echo "Step 1<br>";
 
-require 'includes/db.php';
+$election = get_active_election($conn);
+
 echo "Step 2<br>";
 
-require 'includes/functions.php';
+$announcements = $conn->query("
+    SELECT * FROM announcements
+    WHERE is_active = 1
+    ORDER BY created_at DESC
+    LIMIT 3
+")->fetchAll();
+
 echo "Step 3<br>";
-
-$election = get_active_election($conn);
-echo "Step 4<br>";
-
-require 'includes/db.php';
-require 'includes/functions.php';
 
 $election = get_active_election($conn);
 $announcements = $conn->query("SELECT * FROM announcements WHERE is_active = 1 ORDER BY created_at DESC LIMIT 3")->fetchAll();
