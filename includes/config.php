@@ -18,7 +18,7 @@ if ($isLocal) {
     define('DB_HOST', getenv('DB_HOST') ?: 'db.eyesiwztymhvnqhglnzz.supabase.co');
     define('DB_NAME', getenv('DB_NAME') ?: 'postgres');
     define('DB_USER', getenv('DB_USER') ?: 'postgres');
-    define('DB_PASS', getenv('DB_PASS') ?: 'DB_PASS');
+    define('DB_PASS', getenv('DB_PASS') ?: 'AshutosH$12');
     define('APP_URL', getenv('APP_URL') ?: '');
     define('APP_ENV', getenv('APP_ENV') ?: 'production');
 }
