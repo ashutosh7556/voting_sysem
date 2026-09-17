@@ -12,6 +12,7 @@ if ($isLocal) {
     define('DB_NAME', getenv('DB_NAME') ?: 'voting-system');
     define('DB_USER', getenv('DB_USER') ?: 'root');
     define('DB_PASS', getenv('DB_PASS') ?: 'root');
+    define('DB_PORT', getenv('DB_PORT') ?: '5432');
     define('APP_URL', getenv('APP_URL') ?: 'http://localhost/voting_sysem');
     define('APP_ENV', getenv('APP_ENV') ?: 'local');
 } else {
