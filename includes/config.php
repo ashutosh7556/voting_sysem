@@ -15,11 +15,11 @@ if ($isLocal) {
     define('APP_URL', getenv('APP_URL') ?: 'http://localhost/voting_sysem');
     define('APP_ENV', getenv('APP_ENV') ?: 'local');
 } else {
-    define('DB_HOST', getenv('DB_HOST') ?: 'sql107.infinityfree.com');
-    define('DB_NAME', getenv('DB_NAME') ?: 'if0_42432200_voting_system');
-    define('DB_USER', getenv('DB_USER') ?: 'if0_42432200');
-    define('DB_PASS', getenv('DB_PASS') ?: 'Ashu1234X9');
-    define('APP_URL', getenv('APP_URL') ?: 'https://securevoting.infinityfreeapp.com');
+    define('DB_HOST', getenv('DB_HOST') ?: 'db.eyesiwztymhvnqhglnzz.supabase.co');
+    define('DB_NAME', getenv('DB_NAME') ?: 'postgres');
+    define('DB_USER', getenv('DB_USER') ?: 'postgres');
+    define('DB_PASS', getenv('DB_PASS') ?: 'DB_PASS');
+    define('APP_URL', getenv('APP_URL') ?: '');
     define('APP_ENV', getenv('APP_ENV') ?: 'production');
 }
 
